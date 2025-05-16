@@ -4,15 +4,16 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 from pathlib import Path
+import joblib
 
 # load data and mapping
 
 df = pd.read_csv("data/Melbourne_clean.csv")
 df["date"] = pd.to_datetime(df["date"])
-
 type_labels = {"h": "House", "u": "Unit", "t": "Townhouse"}
-
 df["type_full"] = df["type"].map(type_labels)
+
+model = joblib.load("app/price_model.pkl")
 
 st.set_page_config(page_title="Melbourne Real Estate Dashboard", layout="wide")
 
@@ -90,3 +91,52 @@ map_fig = px.scatter_mapbox(
     height=700,
 )
 st.plotly_chart(map_fig, use_container_width=True)
+
+# Price Prediction Tool
+
+st.header("Predict House Price")
+
+with st.form("prediction_form"):
+    st.markdown("Enter property details to estimate price:")
+
+    col1, col2 = st.columns(2)
+    with col1:
+        suburb_input = st.selectbox("Suburb", sorted(df["suburb"].unique()))
+        region_input = st.selectbox("Region name", sorted(df["regionname"].unique()))
+        car = st.slider("Car spaces", 0, 5, 1)
+        rooms = st.slider("Rooms", 1, 10, 3)
+        bedrooms = st.slider("Bedrooms", 1, 10, 3)
+        bathroom = st.slider("Bathrooms", 1, 5, 1)
+
+    with col2:
+        type_options = {"House": "h", "Unit": "u", "Townhouse": "t"}
+        type_label = st.selectbox("Property type", list(type_options.keys()))
+        type_input = type_options[type_label]
+        landsize = st.number_input("Land size (sqm)", 0, 2000, 500)
+        distance = st.number_input(
+            "Distance to Center Buisness District (km)", 0.0, 50.0, 10.0
+        )
+        propertycount = st.number_input("Properties in suburb", 0, 10000, 5000)
+
+    submitted = st.form_submit_button("Estimate Price")
+
+    if submitted:
+        input_df = pd.DataFrame(
+            [
+                {
+                    "suburb": suburb_input,
+                    "type": type_input,
+                    "regionname": region_input,
+                    "rooms": rooms,
+                    "bedroom2": bedrooms,
+                    "bathroom": bathroom,
+                    "car": car,
+                    "landsize": landsize,
+                    "distance": distance,
+                    "propertycount": propertycount,
+                }
+            ]
+        )
+
+        predicted_price = model.predict(input_df)[0]
+        st.success(f"Estimated price: **${predicted_price:,.0f}")
