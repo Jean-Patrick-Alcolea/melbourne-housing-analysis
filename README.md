@@ -4,17 +4,6 @@ An interactive data analysis project exploring real estate trends in Melbourne, 
 
 ---
 
-## 📌 Project Structure
-
-melbourne-real-estate/
-├── data/ # Raw and cleaned data
-├── notebooks/ # EDA, visualizations, KPI calculations
-├── visuals/ # Exported charts and maps
-├── app/ # Streamlit dashboard app
-├── README.md # Project documentation
-
-
----
 
 ## 🧠 Project Objectives
 
