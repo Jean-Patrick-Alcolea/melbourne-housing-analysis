@@ -102,7 +102,6 @@ with st.form("prediction_form"):
     col1, col2 = st.columns(2)
     with col1:
         suburb_input = st.selectbox("Suburb", sorted(df["suburb"].unique()))
-        region_input = st.selectbox("Region name", sorted(df["regionname"].unique()))
         car = st.slider("Car spaces", 0, 5, 1)
         rooms = st.slider("Rooms", 1, 10, 3)
         bedrooms = st.slider("Bedrooms", 1, 10, 3)
@@ -126,7 +125,6 @@ with st.form("prediction_form"):
                 {
                     "suburb": suburb_input,
                     "type": type_input,
-                    "regionname": region_input,
                     "rooms": rooms,
                     "bedroom2": bedrooms,
                     "bathroom": bathroom,
