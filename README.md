@@ -17,13 +17,13 @@ An interactive data analysis and prediction project exploring real estate trends
 
 ## 📊 Key Features
 
-✅ Data cleaning and preprocessing
-✅ Exploratory Data Analysis (EDA) with visualizations
-✅ KPI calculation notebook
-✅ Interactive price prediction model using Scikit-learn
-✅ Dashboard with filters for suburb, property type, and date
-✅ Price distribution and suburb-level insights with Plotly
-✅ Exported visuals for reporting
+- ✅ Data cleaning and preprocessing
+- ✅ Exploratory Data Analysis (EDA) with visualizations
+- ✅ KPI calculation notebook
+- ✅ Interactive price prediction model using Scikit-learn
+- ✅ Dashboard with filters for suburb, property type, and date
+- ✅ Price distribution and suburb-level insights with Plotly
+- ✅ Exported visuals for reporting
 
 ---
 
@@ -61,9 +61,9 @@ A Random Forest Regressor model was trained to predict house prices using featur
 
 - Region name, Property count, and more
 
-✅ Includes feature preprocessing and encoding
-✅ Actual vs. Predicted price plot
-✅ Scalable for future model improvements
+- ✅ Includes feature preprocessing and encoding
+- ✅ Actual vs. Predicted price plot
+- ✅ Scalable for future model improvements
 
 ---
 
